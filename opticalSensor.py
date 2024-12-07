@@ -12,17 +12,11 @@ class OPTICAL:
 
     def run_optical_sensor(self):
         while True:
-            try:
-                resp = self.spi.xfer2([0x68, 0x00])                 
-                volume = ((resp[0] << 8) + resp[1]) & 0x3FF    
-                print(volume)                                  
-                time.sleep(self.sleep)                                  
-
-            except KeyboardInterrupt:
-                #NOTE: Quit::Ctrl+C
-                self.spi.close()                            
-                sys.exit()                             
-
+            resp = self.spi.xfer2([0x68, 0x00])                 
+            volume = ((resp[0] << 8) + resp[1]) & 0x3FF    
+            print(f"Optical Sensor: {volume}")                                  
+            time.sleep(self.sleep)                                  
+                
 
 if __name__ == "__main__":
     os = OPTICAL()
